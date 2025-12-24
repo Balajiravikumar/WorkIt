@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="LOG_HOME" value="C:/shared"/>
+	
+	<appender name="FILE-APNDR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/home/recs.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%-5.5level | %d{dd-MMM-yyyy hh:mm:ss aa} | %-60.60class |->  %msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/home/old/%d{dd-MMM-yyyy}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+	
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %-5.5level | %d{dd-MMM-yyyy hh:mm:ss aa} | %-60.60class |->  %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+     
+     <!-- 
+	<logger name="in.recs" level="error" additivity="false">  info debug error
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+ -->
+ 
+	<root level="info"> <!-- info debug error -->
+		<appender-ref ref="FILE-APNDR"/>
+		<!-- <appender-ref ref="CONSOLE"/> -->
+	</root>
+	
+
+</configuration>
